@@ -1,0 +1,16 @@
+// with some modulus
+void combinations()
+{
+    long long int n,m; cin>>n>>m;
+    long long int f[m+1],inv[m+1],rf[m+1],p[m+1],mod=998244353;
+    f[0] = f[1] = 1; inv[1] = rf[0] = rf[1] = p[0]=1; p[1]=2;
+    fo(i,2,m+1) 
+    {
+        f[i] = f[i-1]*i%mod;
+        inv[i] = mod-(mod/i) * inv[mod%i]%mod;
+        rf[i] = rf[i-1] * inv[i] % mod;
+        p[i] = p[i-1]*2%mod; 
+    }
+    // mCn
+    cout << f[m] * rf[n] % mod * rf[m-n] % mod ; 
+}
